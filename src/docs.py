@@ -97,8 +97,25 @@ def main(wf):
                     icon=ICON_WARNING)
 
     for result in results:
+        if result['id'].startswith('django.'):
+            title = result['id']
+        elif result['id'].startswith('setting-'):
+            title = '{} [setting]'.format(result['title'])
+        elif result['id'].startswith('templatefilter-'):
+            title = '{} [template filter]'.format(result['title'])
+        elif result['id'].startswith('fieldlookup-'):
+            title = '{} [field lookup]'.format(result['title'])
+        elif result['id'].startswith('templatetag-'):
+            title = '{} [template tag]'.format(result['title'])
+        elif result['id'].startswith('cmdoption-'):
+            title = '{} [cmd option]'.format(result['title'])
+        elif result['id'].startswith('envvar-'):
+            title = '{} [env var]'.format(result['title'])
+        else:
+            title = result['title']
+
         wf.add_item(uid=result['id'],
-                    title=result['id'] if result['id'].startswith('django.') else result['title'],
+                    title=title,
                     subtitle=result['content'] if len(result['content']) else result['id'],
                     arg=result['permalink'],
                     valid=True,

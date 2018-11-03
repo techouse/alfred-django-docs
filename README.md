@@ -31,7 +31,7 @@ dj v1.11 as_p
 
 ### Note
 
-The search powered by [Algolia search](https://www.algolia.com) using a __free Community plan__.
+Built using [Alfred-Workflow](https://github.com/deanishe/alfred-workflow). The search powered by [Algolia search](https://www.algolia.com) using a __free Community plan__.
 Since the community plan only supports __10,000__ records I had to cut it short and support only 2 branches of the documentation.
 That is the reason why there is no documentation for the `2.0` branch.
 

@@ -22,8 +22,8 @@ Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in y
 
 ## Changing Branches
 
-The workflow supports searching the documentation of the branches `2.1` and `1.11`. 
-By default it searches the `2.1` branch. To search branch `1.11` simply type `v1.11` anywhere in your query, like so:
+The workflow supports searching the documentation of all the currently officially supported branches `2.1`, `2.0` and `1.11`. 
+By default it searches the `2.1` branch. To search branch `2.0` or `1.11` simply type `v2.0` or `v1.11` anywhere in your query, like so:
 
 ```
 dj v1.11 as_p
@@ -31,8 +31,9 @@ dj v1.11 as_p
 
 ### Note
 
-Built using [Alfred-Workflow](https://github.com/deanishe/alfred-workflow). The search is powered by [Algolia search](https://www.algolia.com) using a __free Community plan__.
-Since the community plan only supports __10,000__ records I had to cut it short and support only 2 branches of the documentation.
-That is the reason why there is no documentation for the `2.0` branch.
+Built using [Alfred-Workflow](https://github.com/deanishe/alfred-workflow).
+The lightning fast search is powered by [Algolia](https://www.algolia.com) which was generous enough to hand me a big 
+enough plan to fit all the indices for the officially supported Django documentation versions.
+A big thank you to [@redox](https://github.com/redox) from [@algolia](https://github.com/algolia) :innocent: :beers: :heart:
 
 The index for Algolia was compiled from the zipped Django HTML documentation using a [simple Python script](https://github.com/techouse/django-docs-parser) I wrote.

@@ -115,3 +115,12 @@ dmypy.json
 
 # macOS specific
 .DS_Store
+
+# Package specific
+src/algoliasearch
+src/certifi
+src/chardet
+src/idna
+src/requests
+src/urllib3
+src/workflow

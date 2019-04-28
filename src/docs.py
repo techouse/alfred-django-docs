@@ -10,7 +10,7 @@ from HTMLParser import HTMLParser
 
 from algoliasearch import algoliasearch
 from config import Config
-from workflow import Workflow, ICON_WARNING
+from workflow import Workflow, ICON_WARNING, ICON_INFO
 
 # h.unescape() turns HTML escapes back into real characters
 h = HTMLParser()
@@ -56,6 +56,15 @@ def search(
 
 
 def main(wf):
+    if wf.update_available:
+        # Add a notification to top of Script Filter results
+        wf.add_item(
+            "New version available",
+            "Action this item to install the update",
+            autocomplete="workflow:update",
+            icon=ICON_INFO,
+        )
+
     query = wf.args[0].strip()
 
     # Tag prefix only. Treat as blank query
@@ -131,6 +140,8 @@ def main(wf):
 
 
 if __name__ == "__main__":
-    wf = Workflow()
+    wf = Workflow(
+        update_settings={"github_slug": "techouse/alfred-django-docs", "frequency": 7}
+    )
     log = wf.logger
     sys.exit(wf.run(main))

@@ -8,7 +8,7 @@ import re
 import sys
 from HTMLParser import HTMLParser
 
-from algoliasearch import algoliasearch
+from algoliasearch.search_client import SearchClient
 from config import Config
 from workflow import Workflow, ICON_WARNING, ICON_INFO
 
@@ -16,7 +16,7 @@ from workflow import Workflow, ICON_WARNING, ICON_INFO
 h = HTMLParser()
 
 # Algolia client
-client = algoliasearch.Client(Config.ALGOLIA_APP_ID, Config.ALGOLIA_SEARCH_ONLY_API_KEY)
+client = SearchClient.create(Config.ALGOLIA_APP_ID, Config.ALGOLIA_SEARCH_ONLY_API_KEY)
 index = client.init_index(Config.ALGOLIA_SEARCH_INDEX)
 
 # log

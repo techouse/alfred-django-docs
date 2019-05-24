@@ -124,3 +124,4 @@ src/idna
 src/requests
 src/urllib3
 src/workflow
+src/typing.py

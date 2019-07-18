@@ -8,6 +8,7 @@ class Config(object):
     CACHE_MAX_AGE = 20  # seconds
     # Icon
     DJANGO_ICON = "icon.png"
+    GOOGLE_ICON = "google.png"
     # supported docs
     SUPPORTED_DJANGO_VERSIONS = {"v2.2", "v2.1", "v1.11"}
     DEFAULT_DJANGO_VERSION = "2.2"

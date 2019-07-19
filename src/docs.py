@@ -7,6 +7,7 @@ import functools
 import re
 import sys
 from urllib import quote_plus
+from textwrap import wrap
 
 from algoliasearch.search_client import SearchClient
 from config import Config
@@ -45,7 +46,12 @@ def search(
 ):
     if query:
         results = index.search(
-            query, {"filters": "version=" + version, "page": 0, "hitsPerPage": limit}
+            query,
+            {
+                "facetFilters": ["version:{}".format(version)],
+                "page": 0,
+                "hitsPerPage": limit,
+            },
         )
         if results is not None and "hits" in results:
             return results["hits"]
@@ -132,10 +138,18 @@ def main(wf):
         else:
             title = result["title"]
 
+        subtitle = result["content"]
+        if subtitle:
+            subtitle = wrap(subtitle, width=75)[0]
+            if len(result["content"]) > 75:
+                subtitle += " ..."
+        else:
+            subtitle = result["id"]
+
         wf.add_item(
             uid=result["id"],
             title=title,
-            subtitle=result["content"] if len(result["content"]) else result["id"],
+            subtitle=subtitle,
             arg=result["permalink"],
             valid=True,
             largetext=result["id"],

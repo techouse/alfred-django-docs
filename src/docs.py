@@ -6,12 +6,12 @@ from __future__ import print_function, unicode_literals, absolute_import
 import functools
 import re
 import sys
-from urllib import quote_plus
 from textwrap import wrap
+from urllib import quote_plus
 
 from algoliasearch.search_client import SearchClient
 from config import Config
-from workflow import Workflow, ICON_INFO
+from workflow import Workflow3, ICON_INFO
 
 # Algolia client
 client = SearchClient.create(Config.ALGOLIA_APP_ID, Config.ALGOLIA_SEARCH_ONLY_API_KEY)
@@ -27,7 +27,7 @@ def cache_key(query, version=Config.DEFAULT_DJANGO_VERSION):
     key = key.lower()
     key = re.sub(r"[^a-z0-9-_;.]", "-", key)
     key = re.sub(r"-+", "-", key)
-    log.debug("Cache key : {!r} {!r} -> {!r}".format(query, version, key))
+    # log.debug("Cache key : {!r} {!r} -> {!r}".format(query, version, key))
     return key
 
 
@@ -74,8 +74,6 @@ def main(wf):
     if query == "v":
         query = ""
 
-    log.debug("query : {!r}".format(query))
-
     if not query:
         wf.add_item("Search the Django documentation")
         wf.send_feedback()
@@ -95,6 +93,9 @@ def main(wf):
 
     query = " ".join(query)
 
+    # log.debug("version: {!r}".format(version))
+    # log.debug("query: {!r}".format(query))
+
     key = cache_key(query, version)
 
     results = [
@@ -104,7 +105,8 @@ def main(wf):
         )
     ]
 
-    log.debug("{} results for {!r}, version {!r}".format(len(results), query, version))
+    # log.debug("{} results for {!r}, version {!r}".format(len(results), query, version))
+
     # Show results
     if not results:
         url = "https://www.google.com/search?q={}".format(
@@ -112,7 +114,7 @@ def main(wf):
         )
         wf.add_item(
             "No matching answers found",
-            "Try a and search Google?",
+            "Shall I try and search Google?",
             valid=True,
             arg=url,
             copytext=url,
@@ -163,7 +165,7 @@ def main(wf):
 
 
 if __name__ == "__main__":
-    wf = Workflow(
+    wf = Workflow3(
         update_settings={"github_slug": "techouse/alfred-django-docs", "frequency": 7}
     )
     log = wf.logger

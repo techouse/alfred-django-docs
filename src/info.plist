@@ -102,7 +102,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Search the Django documentation using Alfred</string>
 	<key>uidata</key>
 	<dict>
 		<key>1B414F90-9594-4F84-8154-9FD8300D2FDB</key>
@@ -123,7 +123,7 @@
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0.6</string>
+	<string>1.0.7</string>
 	<key>webaddress</key>
 	<string>https://github.com/techouse</string>
 </dict>

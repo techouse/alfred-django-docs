@@ -26,8 +26,8 @@ Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in y
 
 ## Changing Branches
 
-The workflow supports searching the documentation of all the currently officially supported branches `2.2`, `2.1` and `1.11`. 
-By default it searches the `2.2` branch. To search branch `2.1` or `1.11` simply type `v2.1` or `v1.11` anywhere in your query, like so:
+The workflow supports searching the documentation of all the currently officially supported branches `3.0` `2.2`, and `1.11`. 
+By default it searches the `3.0` branch. To search branch `2.2` or `1.11` simply type `v2.2` or `v1.11` anywhere in your query, like so:
 
 ```
 dj v1.11 as_p

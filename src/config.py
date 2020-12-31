@@ -10,8 +10,8 @@ class Config(object):
     DJANGO_ICON = "icon.png"
     GOOGLE_ICON = "google.png"
     # supported docs
-    SUPPORTED_DJANGO_VERSIONS = {"v3", "v2.2", "v1.11"}
-    DEFAULT_DJANGO_VERSION = "3"
+    SUPPORTED_DJANGO_VERSIONS = {"3.1", "3.0", "2.2", "2.1", "2.0", "1.11", "1.10", "1.8"}
+    DEFAULT_DJANGO_VERSION = "3.1"
     # Algolia credentials
     ALGOLIA_APP_ID = "WODHKE4WZG"
     ALGOLIA_SEARCH_ONLY_API_KEY = "7456cdd91ba8d4f87846549697397759"

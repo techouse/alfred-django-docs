@@ -4,7 +4,7 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/techouse/alfred-django-docs/total.svg)
 ![GitHub](https://img.shields.io/github/license/techouse/alfred-django-docs.svg)
 
-Search the [Django documentation](https://docs.djangoproject.com/en/2.1/) using [Alfred](https://www.alfredapp.com/). 
+Search the [Django documentation](https://docs.djangoproject.com/en/3.1/) using [Alfred](https://www.alfredapp.com/). 
 
 ![demo](demo.gif)
 
@@ -26,8 +26,8 @@ Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in y
 
 ## Changing Branches
 
-The workflow supports searching the documentation of all the currently officially supported branches `3.0` `2.2`, and `1.11`. 
-By default it searches the `3.0` branch. To search branch `2.2` or `1.11` simply type `v2.2` or `v1.11` anywhere in your query, like so:
+The workflow supports searching the documentation of all the currently officially supported branches. 
+By default, it searches the latest stable branch. To search branch `2.2` or `1.11` simply type `v2.2` or `v1.11` anywhere in your query, like so:
 
 ```
 dj v1.11 as_p

@@ -86,7 +86,7 @@ def main(wf):
     version = Config.DEFAULT_DJANGO_VERSION
 
     for word in words:
-        if word in Config.SUPPORTED_DJANGO_VERSIONS:
+        if word.replace("v", "") in Config.SUPPORTED_DJANGO_VERSIONS:
             version = word.replace("v", "")
         else:
             query.append(word)

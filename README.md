@@ -35,7 +35,6 @@ dj v3.2 as_p
 
 ### Note
 
-Built using [Alfred-Workflow](https://github.com/deanishe/alfred-workflow).
 The lightning fast search is powered by [Algolia](https://www.algolia.com) which was generous enough to hand me a big 
 enough plan to fit all the indices for the officially supported Django documentation versions.
 A big thank you to [@redox](https://github.com/redox) from [@algolia](https://github.com/algolia) :innocent: :beers: :heart:

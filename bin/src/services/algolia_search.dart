@@ -18,7 +18,9 @@ class AlgoliaSearch {
       _algolia.instance
           .index(Config.algoliaSearchIndex)
           .query(queryString)
-          .facetFilter('version:${(version ?? Config.supportedVersions.last).replaceAll('v', '')}')
+          .facetFilter(
+            'version:${(version ?? Config.supportedVersions.last).replaceAll('v', '')}',
+          )
           .setAttributesToRetrieve(SearchResult.attributesToRetrieve)
           .setDistinct(value: 1)
           .setPage(0)

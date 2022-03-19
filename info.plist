@@ -12,6 +12,31 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>C5216DF9-98A9-408C-83DA-38B7ACA29C81</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C5216DF9-98A9-408C-83DA-38B7ACA29C81</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>111967AB-DEA2-4B7D-9A84-29513F154993</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>D850B7E1-B6F7-4A5E-8EF6-522CBF4E0A21</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>DBCBD91C-A2EB-4A12-B894-6604654C2D3B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -32,6 +57,29 @@
 	<string>Django Docs</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./docs -u</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>111967AB-DEA2-4B7D-9A84-29513F154993</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -84,6 +132,36 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>update:workflow</string>
+						<key>outputlabel</key>
+						<string>Update Workflow</string>
+						<key>uid</key>
+						<string>D850B7E1-B6F7-4A5E-8EF6-522CBF4E0A21</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Open URL</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>C5216DF9-98A9-408C-83DA-38B7ACA29C81</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>spaces</key>
@@ -105,25 +183,39 @@
 	<string>Search the Django documentation using Alfred</string>
 	<key>uidata</key>
 	<dict>
+		<key>111967AB-DEA2-4B7D-9A84-29513F154993</key>
+		<dict>
+			<key>xpos</key>
+			<integer>785</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
 		<key>1B414F90-9594-4F84-8154-9FD8300D2FDB</key>
 		<dict>
 			<key>xpos</key>
-			<integer>240</integer>
+			<integer>290</integer>
 			<key>ypos</key>
-			<integer>150</integer>
+			<integer>315</integer>
+		</dict>
+		<key>C5216DF9-98A9-408C-83DA-38B7ACA29C81</key>
+		<dict>
+			<key>xpos</key>
+			<integer>530</integer>
+			<key>ypos</key>
+			<integer>335</integer>
 		</dict>
 		<key>DBCBD91C-A2EB-4A12-B894-6604654C2D3B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>490</integer>
+			<integer>780</integer>
 			<key>ypos</key>
-			<integer>150</integer>
+			<integer>460</integer>
 		</dict>
 	</dict>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.0.3</string>
+	<string>2.0.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/techouse</string>
 </dict>

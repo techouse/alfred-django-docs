@@ -22,7 +22,6 @@ class AlgoliaSearch {
             'version:${(version ?? Config.supportedVersions.last).replaceAll('v', '')}',
           )
           .setAttributesToRetrieve(SearchResult.attributesToRetrieve)
-          .setDistinct(value: 1)
           .setPage(0)
           .setHitsPerPage(20)
           .getObjects();

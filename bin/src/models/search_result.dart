@@ -45,7 +45,7 @@ class SearchResult {
         id = json['id'] as String,
         permalink = json['permalink'] as String,
         title = json['title'] as String,
-        version = json['version'] as int;
+        version = json['version'] as num;
 
   Map<String, dynamic> toJson() => {
         'objectID': objectID,

@@ -63,7 +63,7 @@ void main(List<String> arguments) async {
     if (queryString.isEmpty) {
       _showPlaceholder();
     } else {
-      workflow.cacheKey = '${queryString}_${version}';
+      workflow.cacheKey = '${queryString}_$version';
       if (await workflow.getItems() == null) {
         await _performSearch(queryString, version: version);
       }
@@ -118,7 +118,7 @@ Future<void> _performSearch(String query, {String? version}) async {
           return AlfredItem(
             uid: result.objectID,
             title: result.prettyTitle,
-            subtitle: result.content.length > 0
+            subtitle: result.content.isNotEmpty
                 ? result.content.truncate(75)
                 : result.id,
             arg: result.permalink,

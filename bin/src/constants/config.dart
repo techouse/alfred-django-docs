@@ -1,7 +1,7 @@
 class Config {
   Config._();
 
-  static const String version = '2.1.3';
+  static const String version = '2.1.4';
   static final Uri githubRepositoryUrl =
       Uri.https('github.com', '/techouse/alfred-django-docs');
   static const String algoliaApplicationId = 'WODHKE4WZG';
@@ -19,5 +19,6 @@ class Config {
     'v3.1',
     'v3.2',
     'v4',
+    'v4.1',
   ];
 }

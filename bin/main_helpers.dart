@@ -3,18 +3,17 @@ part of 'main.dart';
 final AlfredWorkflow _workflow = AlfredWorkflow();
 
 final AlfredUpdater _updater = AlfredUpdater(
-  githubRepositoryUrl: Config.githubRepositoryUrl,
-  currentVersion: Config.version,
+  githubRepositoryUrl: Uri.parse(Env.githubRepositoryUrl),
+  currentVersion: Env.appVersion,
   updateInterval: Duration(days: 7),
 );
-
 
 const _updateItem = AlfredItem(
   title: 'Auto-Update available!',
   subtitle: 'Press <enter> to auto-update to a new version of this workflow.',
   arg: 'update:workflow',
   match:
-  'Auto-Update available! Press <enter> to auto-update to a new version of this workflow.',
+      'Auto-Update available! Press <enter> to auto-update to a new version of this workflow.',
   icon: AlfredItemIcon(path: 'alfredhatcog.png'),
   valid: true,
 );
@@ -37,7 +36,7 @@ Future<void> _performSearch(String query, {String? version}) async {
   if (snapshot.nbHits > 0) {
     final AlfredItems items = AlfredItems(
       snapshot.hits.map((snapshot) => SearchResult.fromJson(snapshot.data)).map(
-            (result) {
+        (result) {
           return AlfredItem(
             uid: result.objectID,
             title: result.prettyTitle,
@@ -59,7 +58,7 @@ Future<void> _performSearch(String query, {String? version}) async {
     _workflow.addItems(items.items);
   } else {
     final Uri url =
-    Uri.https('www.google.com', '/search', {'q': 'Django $query'});
+        Uri.https('www.google.com', '/search', {'q': 'Django $query'});
 
     _workflow.addItem(
       AlfredItem(

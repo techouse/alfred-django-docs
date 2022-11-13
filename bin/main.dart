@@ -10,6 +10,7 @@ import 'package:alfred_workflow/alfred_workflow.dart'
         AlfredWorkflow;
 import 'package:algolia/algolia.dart' show AlgoliaQuerySnapshot;
 import 'package:args/args.dart' show ArgParser, ArgResults;
+import 'package:cli_script/cli_script.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 
 import 'src/constants/config.dart' show Config;
@@ -17,139 +18,69 @@ import 'src/extensions/string_helpers.dart' show StringHelpers;
 import 'src/models/search_result.dart' show SearchResult;
 import 'src/services/algolia_search.dart' show AlgoliaSearch;
 
-final AlfredWorkflow workflow = AlfredWorkflow();
-final AlfredUpdater updater = AlfredUpdater(
-  githubRepositoryUrl: Config.githubRepositoryUrl,
-  currentVersion: Config.version,
-  updateInterval: Duration(days: 7),
-);
-bool verbose = false;
-bool update = false;
+part 'main_helpers.dart';
 
-void main(List<String> arguments) async {
-  try {
-    exitCode = 0;
+bool _verbose = false;
+bool _update = false;
 
-    workflow.clearItems();
+void main(List<String> arguments) {
+  wrapMain(() async {
+    try {
+      exitCode = 0;
 
-    final ArgParser parser = ArgParser()
-      ..addOption('query', abbr: 'q', defaultsTo: '')
-      ..addFlag('verbose', abbr: 'v', defaultsTo: false)
-      ..addFlag('update', abbr: 'u', defaultsTo: false);
-    final ArgResults args = parser.parse(arguments);
+      _workflow.clearItems();
 
-    update = args['update'];
-    if (update) {
-      stdout.writeln('Updating workflow...');
+      final ArgParser parser = ArgParser()
+        ..addOption('query', abbr: 'q', defaultsTo: '')
+        ..addFlag('verbose', abbr: 'v', defaultsTo: false)
+        ..addFlag('update', abbr: 'u', defaultsTo: false);
+      final ArgResults args = parser.parse(arguments);
 
-      return await updater.update();
-    }
+      _update = args['update'];
+      if (_update) {
+        stdout.writeln('Updating workflow...');
 
-    verbose = args['verbose'];
-
-    List<String> query =
-        args['query'].replaceAll(RegExp(r'\s+'), ' ').trim().split(' ');
-    String? version =
-        query.firstWhereOrNull((el) => Config.supportedVersions.contains(el));
-    if (version != null) {
-      query.removeWhere((str) => str == version);
-    } else {
-      version = Config.supportedVersions.last;
-    }
-    final String queryString = query.join(' ').trim().toLowerCase();
-
-    if (verbose) stdout.writeln('Query: "$queryString"');
-
-    if (queryString.isEmpty) {
-      _showPlaceholder();
-    } else {
-      workflow.cacheKey = '${queryString}_$version';
-      if (await workflow.getItems() == null) {
-        await _performSearch(queryString, version: version);
+        return await _updater.update();
       }
-    }
-  } on FormatException catch (err) {
-    exitCode = 2;
-    workflow.addItem(AlfredItem(title: err.toString()));
-  } catch (err) {
-    exitCode = 1;
-    workflow.addItem(AlfredItem(title: err.toString()));
-    if (verbose) rethrow;
-  } finally {
-    if (!update) {
-      if (await updater.updateAvailable()) {
-        workflow.run(addToBeginning: updateItem);
+
+      _verbose = args['verbose'];
+
+      List<String> query =
+          args['query'].replaceAll(RegExp(r'\s+'), ' ').trim().split(' ');
+      String? version =
+          query.firstWhereOrNull((el) => Config.supportedVersions.contains(el));
+      if (version != null) {
+        query.removeWhere((str) => str == version);
       } else {
-        workflow.run();
+        version = Config.supportedVersions.last;
+      }
+      final String queryString = query.join(' ').trim().toLowerCase();
+
+      if (_verbose) stdout.writeln('Query: "$queryString"');
+
+      if (queryString.isEmpty) {
+        _showPlaceholder();
+      } else {
+        _workflow.cacheKey = '${queryString}_$version';
+        if (await _workflow.getItems() == null) {
+          await _performSearch(queryString, version: version);
+        }
+      }
+    } on FormatException catch (err) {
+      exitCode = 2;
+      _workflow.addItem(AlfredItem(title: err.toString()));
+    } catch (err) {
+      exitCode = 1;
+      _workflow.addItem(AlfredItem(title: err.toString()));
+      if (_verbose) rethrow;
+    } finally {
+      if (!_update) {
+        if (await _updater.updateAvailable()) {
+          _workflow.run(addToBeginning: _updateItem);
+        } else {
+          _workflow.run();
+        }
       }
     }
-  }
-}
-
-const updateItem = AlfredItem(
-  title: 'Auto-Update available!',
-  subtitle: 'Press <enter> to auto-update to a new version of this workflow.',
-  arg: 'update:workflow',
-  match:
-      'Auto-Update available! Press <enter> to auto-update to a new version of this workflow.',
-  icon: AlfredItemIcon(path: 'alfredhatcog.png'),
-  valid: true,
-);
-
-void _showPlaceholder() {
-  workflow.addItem(
-    const AlfredItem(
-      title: 'Search the Django docs...',
-      icon: AlfredItemIcon(path: 'icon.png'),
-    ),
-  );
-}
-
-Future<void> _performSearch(String query, {String? version}) async {
-  final AlgoliaQuerySnapshot snapshot = await AlgoliaSearch.query(
-    query,
-    version: version,
-  );
-
-  if (snapshot.nbHits > 0) {
-    final AlfredItems items = AlfredItems(
-      snapshot.hits.map((snapshot) => SearchResult.fromJson(snapshot.data)).map(
-        (result) {
-          return AlfredItem(
-            uid: result.objectID,
-            title: result.prettyTitle,
-            subtitle: result.content.isNotEmpty
-                ? result.content.truncate(75)
-                : result.id,
-            arg: result.permalink,
-            text: AlfredItemText(
-              largeType: result.id,
-              copy: result.id,
-            ),
-            quickLookUrl: result.permalink,
-            icon: AlfredItemIcon(path: 'icon.png'),
-            valid: true,
-          );
-        },
-      ).toList(),
-    );
-    workflow.addItems(items.items);
-  } else {
-    final Uri url =
-        Uri.https('www.google.com', '/search', {'q': 'Django $query'});
-
-    workflow.addItem(
-      AlfredItem(
-        title: 'No matching answers found',
-        subtitle: 'Shall I try and search Google?',
-        arg: url.toString(),
-        text: AlfredItemText(
-          copy: url.toString(),
-        ),
-        quickLookUrl: url.toString(),
-        icon: AlfredItemIcon(path: 'google.png'),
-        valid: true,
-      ),
-    );
-  }
+  });
 }

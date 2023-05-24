@@ -4,7 +4,7 @@ description: Search the Django documentation using Alfred
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 2.1.6
+version: 2.1.7
 
 environment:
   sdk: '>=3.0.1 <4.0.0'

@@ -4,7 +4,7 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/techouse/alfred-django-docs/total.svg)
 ![GitHub](https://img.shields.io/github/license/techouse/alfred-django-docs.svg)
 
-Search the [Django documentation](https://docs.djangoproject.com/en/4.1/) using [Alfred](https://www.alfredapp.com/). 
+Search the [Django documentation](https://docs.djangoproject.com/) using [Alfred](https://www.alfredapp.com/). 
 
 ![demo](demo.gif)
 

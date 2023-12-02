@@ -3,6 +3,7 @@
 ![GitHub release](https://img.shields.io/github/release/techouse/alfred-django-docs.svg)
 ![GitHub All Releases](https://img.shields.io/github/downloads/techouse/alfred-django-docs/total.svg)
 ![GitHub](https://img.shields.io/github/license/techouse/alfred-django-docs.svg)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/techouse)](https://github.com/sponsors/techouse)
 
 Search the [Django documentation](https://docs.djangoproject.com/) using [Alfred](https://www.alfredapp.com/). 
 

@@ -38,12 +38,10 @@ Future<void> _performSearch(String query, {String? version}) async {
     if (searchResponse.nbHits > 0) {
       final AlfredItems items = AlfredItems(
         searchResponse.hits
-            .map((Hit hit) =>
-            SearchResult.fromJson(
+            .map((Hit hit) => SearchResult.fromJson(
                 <String, dynamic>{...hit, 'objectID': hit.objectID}))
             .map(
-              (SearchResult result) =>
-              AlfredItem(
+              (SearchResult result) => AlfredItem(
                 uid: result.objectID,
                 title: result.prettyTitle,
                 subtitle: result.content.isNotEmpty
@@ -58,13 +56,13 @@ Future<void> _performSearch(String query, {String? version}) async {
                 icon: AlfredItemIcon(path: 'icon.png'),
                 valid: true,
               ),
-        )
+            )
             .toList(),
       );
       _workflow.addItems(items.items);
     } else {
       final Uri url =
-      Uri.https('www.google.com', '/search', {'q': 'Django $query'});
+          Uri.https('www.google.com', '/search', {'q': 'Django $query'});
 
       _workflow.addItem(
         AlfredItem(

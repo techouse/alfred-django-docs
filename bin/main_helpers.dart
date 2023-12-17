@@ -29,32 +29,34 @@ void _showPlaceholder() {
 }
 
 Future<void> _performSearch(String query, {String? version}) async {
-  final AlgoliaQuerySnapshot snapshot = await AlgoliaSearch.query(
+  final SearchResponse searchResponse = await AlgoliaSearch.query(
     query,
     version: version,
   );
 
-  if (snapshot.nbHits > 0) {
+  if (searchResponse.nbHits > 0) {
     final AlfredItems items = AlfredItems(
-      snapshot.hits.map((snapshot) => SearchResult.fromJson(snapshot.data)).map(
-        (result) {
-          return AlfredItem(
-            uid: result.objectID,
-            title: result.prettyTitle,
-            subtitle: result.content.isNotEmpty
-                ? result.content.truncate(75)
-                : result.id,
-            arg: result.permalink,
-            text: AlfredItemText(
-              largeType: result.id,
-              copy: result.id,
+      searchResponse.hits
+          .map((Hit hit) => SearchResult.fromJson(
+              <String, dynamic>{...hit, 'objectID': hit.objectID}))
+          .map(
+            (SearchResult result) => AlfredItem(
+              uid: result.objectID,
+              title: result.prettyTitle,
+              subtitle: result.content.isNotEmpty
+                  ? result.content.truncate(75)
+                  : result.id,
+              arg: result.permalink,
+              text: AlfredItemText(
+                largeType: result.id,
+                copy: result.id,
+              ),
+              quickLookUrl: result.permalink,
+              icon: AlfredItemIcon(path: 'icon.png'),
+              valid: true,
             ),
-            quickLookUrl: result.permalink,
-            icon: AlfredItemIcon(path: 'icon.png'),
-            valid: true,
-          );
-        },
-      ).toList(),
+          )
+          .toList(),
     );
     _workflow.addItems(items.items);
   } else {

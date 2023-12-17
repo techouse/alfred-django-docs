@@ -8,13 +8,14 @@ import 'package:alfred_workflow/alfred_workflow.dart'
         AlfredItems,
         AlfredUpdater,
         AlfredWorkflow;
-import 'package:algolia/algolia.dart' show AlgoliaQuerySnapshot;
+import 'package:algoliasearch/src/model/hit.dart';
+import 'package:algoliasearch/src/model/search_response.dart';
 import 'package:args/args.dart' show ArgParser, ArgResults;
 import 'package:cli_script/cli_script.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 
 import 'src/env/env.dart';
-import 'src/extensions/string_helpers.dart' show StringHelpers;
+import 'src/extensions/string_helpers.dart';
 import 'src/models/search_result.dart' show SearchResult;
 import 'src/services/algolia_search.dart' show AlgoliaSearch;
 

@@ -15,4 +15,4 @@ bin/*_cache/
 sign.sh
 
 .env
-
+prefs.plist

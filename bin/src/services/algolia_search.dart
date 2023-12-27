@@ -13,14 +13,14 @@ class AlgoliaSearch {
 
   static Future<SearchResponse> query(
     String queryString, {
-    String? version,
+    required String version,
   }) =>
       _client.searchIndex(
         request: SearchForHits(
           indexName: Env.algoliaSearchIndex,
           query: queryString,
           facetFilters: [
-            'version:${(version ?? Env.supportedVersions.last).replaceAll('v', '')}',
+            'version:${version.replaceAll('v', '')}',
           ],
           attributesToRetrieve: SearchResult.attributesToRetrieve,
           page: 0,

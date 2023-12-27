@@ -28,10 +28,10 @@ Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in y
 ## Changing Branches
 
 The workflow supports searching the documentation of all the currently officially supported branches. 
-By default, it searches the latest stable branch. To search branch `3.2` or `2.2` simply type `v3.2` or `v2.2` anywhere in your query, like so:
+By default, it searches the latest stable branch. To search branch `4.2` or `3.2` simply type `v4.2` or `v3.2` anywhere in your query, like so:
 
 ```
-dj v3.2 as_p
+dj v4.2 as_p
 ```
 
 ### Note

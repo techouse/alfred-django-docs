@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>org.techouse.alfred-django-docs</string>
 	<key>category</key>
-	<string>Internet</string>
+	<string>Tools</string>
 	<key>connections</key>
 	<dict>
 		<key>1B414F90-9594-4F84-8154-9FD8300D2FDB</key>
@@ -217,9 +217,78 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variablesdontexport</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>v5</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>5.0</string>
+						<string>v5</string>
+					</array>
+					<array>
+						<string>4.2</string>
+						<string>v4.2</string>
+					</array>
+					<array>
+						<string>4.1</string>
+						<string>v4.1</string>
+					</array>
+					<array>
+						<string>4.0</string>
+						<string>v4</string>
+					</array>
+					<array>
+						<string>3.2</string>
+						<string>v3.2</string>
+					</array>
+					<array>
+						<string>3.1</string>
+						<string>v3.1</string>
+					</array>
+					<array>
+						<string>3.0</string>
+						<string>v3</string>
+					</array>
+					<array>
+						<string>2.2</string>
+						<string>v2.2</string>
+					</array>
+					<array>
+						<string>2.1</string>
+						<string>v2.1</string>
+					</array>
+					<array>
+						<string>2.0</string>
+						<string>v2</string>
+					</array>
+					<array>
+						<string>1.11</string>
+						<string>v1.11</string>
+					</array>
+					<array>
+						<string>1.10</string>
+						<string>v1.10</string>
+					</array>
+					<array>
+						<string>1.8</string>
+						<string>v1.8</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Searching the documentation of this Django version</string>
+			<key>label</key>
+			<string>Django version</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>django_version</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

@@ -25,14 +25,11 @@ dj FormView
 
 Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in your web browser.
 
-## Changing Branches
+## Changing the Django version to search
 
-The workflow supports searching the documentation of all the currently officially supported branches. 
-By default, it searches the latest stable branch. To search branch `4.2` or `3.2` simply type `v4.2` or `v3.2` anywhere in your query, like so:
+The workflow supports searching the documentation of several versions. To change the branch, configure the Workflow as show in the image below.
 
-```
-dj v4.2 as_p
-```
+![configure](configure.png)
 
 ### Note
 

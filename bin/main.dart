@@ -39,8 +39,8 @@ void main(List<String> arguments) {
 
       _verbose = args['verbose'];
 
-      final Map<String, AlfredUserConfiguration>? userDefaults =
-          await _workflow.getUserDefaults();
+      final Map<String, AlfredUserConfiguration>? userDefaults = await _workflow
+          .getUserDefaults();
 
       final AlfredUserConfigurationSelect? djangoVersion =
           userDefaults?[UserConfigKey.djangoVersion.toString()]
@@ -66,8 +66,10 @@ void main(List<String> arguments) {
         throw Exception('django_version not set!');
       }
 
-      List<String> query =
-          args['query'].replaceAll(RegExp(r'\s+'), ' ').trim().split(' ');
+      List<String> query = args['query']
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .trim()
+          .split(' ');
       query.removeWhere((str) => str == djangoVersion.value);
       final String queryString = query.join(' ').trim().toLowerCase();
 

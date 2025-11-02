@@ -38,8 +38,12 @@ Future<void> _performSearch(String query, {required String version}) async {
     if ((searchResponse.nbHits ?? 0) > 0) {
       final AlfredItems items = AlfredItems(
         searchResponse.hits
-            .map((Hit hit) => SearchResult.fromJson(
-                <String, dynamic>{...hit, 'objectID': hit.objectID}))
+            .map(
+              (Hit hit) => SearchResult.fromJson(<String, dynamic>{
+                ...hit,
+                'objectID': hit.objectID,
+              }),
+            )
             .map(
               (SearchResult result) => AlfredItem(
                 uid: result.objectID,
@@ -48,10 +52,7 @@ Future<void> _performSearch(String query, {required String version}) async {
                     ? result.content.truncate(75)
                     : result.id,
                 arg: result.permalink,
-                text: AlfredItemText(
-                  largeType: result.id,
-                  copy: result.id,
-                ),
+                text: AlfredItemText(largeType: result.id, copy: result.id),
                 quickLookUrl: result.permalink,
                 icon: AlfredItemIcon(path: 'icon.png'),
                 valid: true,
@@ -61,17 +62,16 @@ Future<void> _performSearch(String query, {required String version}) async {
       );
       _workflow.addItems(items.items);
     } else {
-      final Uri url =
-          Uri.https('www.google.com', '/search', {'q': 'Django $query'});
+      final Uri url = Uri.https('www.google.com', '/search', {
+        'q': 'Django $query',
+      });
 
       _workflow.addItem(
         AlfredItem(
           title: 'No matching answers found',
           subtitle: 'Shall I try and search Google?',
           arg: url.toString(),
-          text: AlfredItemText(
-            copy: url.toString(),
-          ),
+          text: AlfredItemText(copy: url.toString()),
           quickLookUrl: url.toString(),
           icon: AlfredItemIcon(path: 'google.png'),
           valid: true,

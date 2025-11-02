@@ -14,19 +14,16 @@ class AlgoliaSearch {
   static Future<SearchResponse> query(
     String queryString, {
     required String version,
-  }) =>
-      _client.searchIndex(
-        request: SearchForHits(
-          indexName: Env.algoliaSearchIndex,
-          query: queryString,
-          facetFilters: [
-            'version:${version.replaceAll('v', '')}',
-          ],
-          attributesToRetrieve: SearchResult.attributesToRetrieve,
-          page: 0,
-          hitsPerPage: 20,
-        ),
-      );
+  }) => _client.searchIndex(
+    request: SearchForHits(
+      indexName: Env.algoliaSearchIndex,
+      query: queryString,
+      facetFilters: ['version:${version.replaceAll('v', '')}'],
+      attributesToRetrieve: SearchResult.attributesToRetrieve,
+      page: 0,
+      hitsPerPage: 20,
+    ),
+  );
 
-  static dispose() => _client.dispose();
+  static void dispose() => _client.dispose();
 }

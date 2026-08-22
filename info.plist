@@ -222,9 +222,17 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>v5.2</string>
+				<string>v6.1</string>
 				<key>pairs</key>
 				<array>
+					<array>
+						<string>6.1</string>
+						<string>v6.1</string>
+					</array>
+					<array>
+						<string>6.0</string>
+						<string>v6</string>
+					</array>
 					<array>
 						<string>5.2</string>
 						<string>v5.2</string>

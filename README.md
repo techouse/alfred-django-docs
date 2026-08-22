@@ -5,7 +5,7 @@
 ![GitHub](https://img.shields.io/github/license/techouse/alfred-django-docs.svg)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/techouse)](https://github.com/sponsors/techouse)
 
-Search the [Django documentation](https://docs.djangoproject.com/) using [Alfred](https://www.alfredapp.com/). 
+Search the [Django documentation](https://docs.djangoproject.com/) using [Alfred](https://www.alfredapp.com/).
 
 ![demo](demo.gif)
 
@@ -31,9 +31,31 @@ The workflow supports searching the documentation of several versions. To change
 
 ![configure](configure.png)
 
+## Development
+
+The workflow is built with Rust 1.88 or newer on macOS. Copy `.env.example` to
+`.env` and provide the three Algolia settings before building a release binary;
+the release target also accepts settings already exported in the environment.
+
+```sh
+cargo run -- -q "FormView"
+```
+
+Install `cargo-about` before running the complete local check, because `make ci`
+generates the bundled third-party license notice:
+
+```sh
+cargo install cargo-about --locked --features cli
+make ci
+```
+
+`make package` creates the versioned `.alfredworkflow` archive. Release builds
+produce one universal `workflow` binary for Apple Silicon and Intel and keep
+the workflow's runtime cache and `.env` files out of the archive.
+
 ### Note
 
-The lightning fast search is powered by [Algolia](https://www.algolia.com) which was generous enough to hand me a big 
+The lightning fast search is powered by [Algolia](https://www.algolia.com) which was generous enough to hand me a big
 enough plan to fit all the indices for the officially supported Django documentation versions.
 A big thank you to [@redox](https://github.com/redox) from [@algolia](https://github.com/algolia) :innocent: :beers: :heart:
 

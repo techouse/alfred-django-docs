@@ -18,18 +18,32 @@ fn settings(version: &str) -> WorkflowSettings {
 fn plist_defaults_map_to_runtime_settings() -> Result<()> {
     let directory = tempfile::tempdir()?;
     let info_path = directory.path().join("info.plist");
+    let prefs_path = directory.path().join("missing-prefs.plist");
     std::fs::write(&info_path, include_str!("../../info.plist"))?;
+    let workflow = Workflow::new();
 
-    let actual = read_workflow_settings(
-        &Workflow::new(),
-        info_path,
-        directory.path().join("missing-prefs.plist"),
-    )?;
+    let defaults = workflow.get_user_defaults(&info_path, &prefs_path)?;
+    let Some(UserConfiguration::Select(version)) = defaults.get("django_version") else {
+        panic!("django_version must be a select configuration");
+    };
+    assert_eq!(version.config.default_value, "v6.1");
+    assert_eq!(
+        version
+            .config
+            .pairs
+            .iter()
+            .take(2)
+            .map(|pair| (pair.label.as_str(), pair.value.as_str()))
+            .collect::<Vec<_>>(),
+        vec![("6.1", "v6.1"), ("6.0", "v6")]
+    );
+
+    let actual = read_workflow_settings(&workflow, info_path, prefs_path)?;
 
     assert_eq!(
         actual,
         WorkflowSettings {
-            django_version: "v5.2".to_owned(),
+            django_version: "v6.1".to_owned(),
             use_alfred_cache: true,
             use_file_cache: false,
             cache_ttl: Some(86_400),

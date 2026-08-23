@@ -248,6 +248,19 @@ fn runtime_error_does_not_enter_file_cache() -> Result<()> {
 }
 
 #[test]
+fn runtime_error_does_not_emit_automatic_cache_metadata() -> Result<()> {
+    let mut workflow = Workflow::new();
+    workflow.set_use_automatic_cache(true);
+    let error = anyhow::anyhow!("transient search failure");
+
+    replace_items_with_runtime_error(&mut workflow, &error)?;
+
+    let rendered: serde_json::Value = serde_json::from_str(&workflow.to_json_string()?)?;
+    assert!(rendered.get("cache").is_none());
+    Ok(())
+}
+
+#[test]
 fn file_cache_hit_bypasses_algolia() -> Result<()> {
     let directory = tempfile::tempdir()?;
     let mut cached = Workflow::with_file_cache(FileCache::with_path(directory.path()));
